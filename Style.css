@@ -1,0 +1,48 @@
+body{
+	background-image: url(blog.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+main {
+	width: 50%;
+	margin: auto;
+}
+
+h2 {
+	display: inline;
+}
+
+.rubrik{
+	text-align: center;
+	font-size: 100px;
+	font-family: 'Abril Fatface', cursive;
+}
+
+.titel{
+	font-family: 'Abril Fatface', cursive;
+}
+
+.författare{
+	font-family: 'Abril Fatface', cursive;
+}
+
+.border{
+	border-style: dotted solid;
+	font-family: 'Josefin Slab', serif;
+	margin-bottom: 100px;
+}
+
+.txt{
+	margin-left: 10px;
+	font-size: 25px;
+}
+
+.img{
+	float: right;
+	height: 200px;
+	width: 200px;
+	margin-top: 60px;
+	margin-right: 10px;
+}
