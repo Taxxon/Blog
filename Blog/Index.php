@@ -12,14 +12,15 @@
 
 	 <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
 
+	 <script type="text/javascript" src="script.js"></script>
+
 </head>
 
 <body>
 
 <main>
 
-	<h1 class="rubrik">GamePost</h1>"
-
+	<h1 class="rubrik">GamePost</h1>
 
 <?php
 
@@ -33,10 +34,6 @@
 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-
-	include_once("data.php");
-
-
 	foreach ($rows as $key => $value) {
 
 		echo "<article>";
@@ -44,11 +41,14 @@
 		echo "<h2 class=\"titel\">" . $value["title"] . "</h2>";
 		echo "<div class=\"border\">";
 		echo "<p class=\"txt\">" . $value["content"] . "</p>";
-		echo "</div></article>";
+		echo "</div>";
+		echo "<div class=\"border2\"></div>";
+		echo "</article>";
 
 	}
 
 ?>
+
 
 </main>
 
