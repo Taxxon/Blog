@@ -22,13 +22,15 @@
 
 	<h1 class="rubrik">GamePost</h1>
 
+	<button onclick="">Login</button>
+
 <?php
 
 	$dbh = new PDO("mysql:host=localhost;dbname=post;charset=utf8" , 
 				"root",
 				"");
 	
-	$sql = "select * from posts";
+	$sql = "SELECT * FROM posts";
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute();
 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -42,6 +44,7 @@
 		echo "<div class=\"border\">";
 		echo "<p class=\"txt\">" . $value["content"] . "</p>";
 		echo "</div>";
+		echo "<p class=\"date\">" . date("Y-m-d", strtotime($value["date"])) . "</p>";
 		echo "<div class=\"border2\"></div>";
 		echo "</article>";
 
