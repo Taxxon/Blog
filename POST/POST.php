@@ -20,7 +20,7 @@
 			<input type="text" id="title" name="title" size="29" placeholder="Title" required>
 			
 			<label for="content">Text</label>
-			<input type="text" name="content" class="content" placeholder="Content" required>
+			<textarea name="content" class="content" placeholder="Content" required rows="20"></textarea>
 
 			<lable for="image">Bild</lable>
 			<input type="text" id="image" name="image" size="29" placeholder="Image" required>
@@ -114,31 +114,35 @@
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	
-
-		<div class="formdiv">
-		<form action="POST.php" method="post">
-		<label for="title">Titel</label> 
-		<input type="text" id="title" name="title" size="29" placeholder="Title" required>
+		echo ";<div class=\"formdiv\">";
+		echo "<form action=\"POST.php\" method=\"post\">";
+		echo "<label for=\"title\">Titel</label>";
+		echo "<input type=\"text\" id=\"title\" name=\"title\" value=\"" . $value["title"] . "\" size=\"29\" placeholder=\"Title\" required>";
 			
-		<label for="content">Text</label>
-		<input type="text" name="content" class="content" placeholder="Content" required>
+		echo "<label for=\"content\">Text</label>";
+		echo "<textarea name=\"content\" class=\"content\" value=\"" . $value["content"] . "\" placeholder=\"Content\" rows=\"20\" required>" . $value["content"] . "</textarea>";
 
-		<lable for="image">Bild</lable>
-				<input type="text" id="image" name="image" size="29" placeholder="Image" required>
-				<input type="submit" name="submit" value="Submit">
-			</form>
- 		</div>
+		echo "<lable for=\"image\">Bild</lable>";
+		echo "<input type=\"text\" id=\"image\" name=\"image\" value=\"" . $value["image"] . "\" size=\"29\" placeholder=\"Image\" required>";
+		echo "<input type=\"submit\" name=\"editpost\" value=\"Editpost\">";
+		echo "</form>";
+ 		echo "</div>";
 
+ 		exit();
+	}
+
+	if(isset($_POST['editpost'])){
 
 		try{
-			$sql = "UPDATE posts SET title='UPDATE', content='UPDATE', image='UPDATE' WHERE  id= " . $_POST['postid2'] . "";
-			$dbh->exec($sql);
+			$sql = "UPDATE posts SET title ='" . $_POST['title'] . "', content ='" . $_POST['content'] . "', image ='" . $_POST['image'] . "' WHERE id =" . $_POST['postid'] . "";
+			echo $sql;
+			$stmt = $dbh->prepare($sql);
+			$stmt->execute();
 		} catch(PDOException $e) {
 			$e->getMessage();
 		}
-		Header("Location: ../POST/POST.php");
-		exit();
+		//Header("Location: ../POST/POST.php");
+		//exit();
 	}
 
 ?>

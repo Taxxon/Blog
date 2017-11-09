@@ -22,8 +22,6 @@
 
 	<h1 class="rubrik">GamePost</h1>
 
-	<button onclick="">Login</button>
-
 <?php
 
 	$dbh = new PDO("mysql:host=localhost;dbname=post;charset=utf8" , 
