@@ -50,6 +50,7 @@
 				$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 				foreach ($rows as $key => $value) {
+					
 					echo "<tr>";
 					echo "<td>" . $value["id"] . "</td>";
 					echo "<td>" . $value["userid"] . "</td>";
@@ -124,6 +125,10 @@
 
 		echo "<lable for=\"image\">Bild</lable>";
 		echo "<input type=\"text\" id=\"image\" name=\"image\" value=\"" . $value["image"] . "\" size=\"29\" placeholder=\"Image\" required>";
+
+		echo "<lable for=\"image\">Bild</lable>";
+		echo "<input type=\"text\" id=\"id\" name=\"id\" value=\"" . $value["id"] . "\" size=\"29\" placeholder=\"Id\" required>";
+
 		echo "<input type=\"submit\" name=\"editpost\" value=\"Editpost\">";
 		echo "</form>";
  		echo "</div>";
@@ -134,7 +139,7 @@
 	if(isset($_POST['editpost'])){
 
 		try{
-			$sql = "UPDATE posts SET title ='" . $_POST['title'] . "', content ='" . $_POST['content'] . "', image ='" . $_POST['image'] . "' WHERE id =" . $_POST['postid'] . "";
+			$sql = "UPDATE posts SET title ='" . $_POST['title'] . "', content ='" . $_POST['content'] . "', image ='" . $_POST['image'] . "' WHERE id =" . $_POST['id'] . "";
 			echo $sql;
 			$stmt = $dbh->prepare($sql);
 			$stmt->execute();
