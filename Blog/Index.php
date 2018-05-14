@@ -1,58 +1,42 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-	<title>Test</title>
-
-	 <link rel="stylesheet" type="text/css" href="style.css">
-
-	 <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
-
-	 <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
-
-	 <script type="text/javascript" src="script.js"></script>
-
-</head>
-
-<body>
-
-<main>
-
-	<h1 class="rubrik">GamePost</h1>
-
 <?php
-
-	$dbh = new PDO("mysql:host=localhost;dbname=post;charset=utf8" , 
-				"root",
-				"");
-	
-	$sql = "SELECT * FROM posts";
-	$stmt = $dbh->prepare($sql);
-	$stmt->execute();
-	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-	foreach ($rows as $key => $value) {
-
-		echo "<article>";
-		echo "<img class=\"img\" src=" . $value["image"] . ">";
-		echo "<h2 class=\"titel\">" . $value["title"] . "</h2>";
-		echo "<div class=\"border\">";
-		echo "<p class=\"txt\">" . $value["content"] . "</p>";
-		echo "</div>";
-		echo "<p class=\"date\">" . date("Y-m-d", strtotime($value["date"])) . "</p>";
-		echo "<div class=\"border2\"></div>";
-		echo "</article>";
-
+	try{
+		$dbh = new PDO("mysql:host=localhost;dbname=post;charset=utf8", "root", "", array(
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,));
+	} catch(PDOException $pe){
+		echo $pe->getMessage();
 	}
-
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blog</title>
+	 <link rel="stylesheet" type="text/css" href="style.css">
+	 <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+	 <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+	 <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+	<main>
+		<h1 class="rubrik">GamePost</h1>
+		<?php
+			$sql = "SELECT * FROM posts";
+			$stmt = $dbh->prepare($sql);
+			$stmt->execute();
+			$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-</main>
-
+			foreach ($rows as $key => $value) { ?>
+				<article>;
+					<img class="img" src=<?php echo $value["image"]; ?>>;
+					<h2 class="titel"><?php echo $value["title"] ?></h2>;
+					<div class="border">;
+						<p class="txt"><?php echo $value["content"] ?></p>;
+					</div>";
+					<p class="date"><?php echo date("Y-m-d", strtotime($value["date"])) ?></p>;
+					<div class="border2"></div>";
+				</article>";
+			<?php
+			}
+			?>
+	</main>
 </body>
-
 </html>

@@ -1,28 +1,13 @@
 body{
-	background-image: url('blog.jpg');
+	background-image: url(blog.jpg);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
 }
 
-main{
-	background: rgba( 5, 2, 7, 0.7);
-	height: 90%;
-	width: 75%;
+main {
+	width: 50%;
 	margin: auto;
-	border-radius: 40px;
-}
-
-p{
-	color: white;
-	font-size: 25px;
-}
-
-.border2{
-	border-style: dashed solid;
-	margin-top: 100px;
-	margin-bottom: 100px;
-	color: white;
 }
 
 .rubrik{
@@ -30,7 +15,6 @@ p{
 	font-size: 100px;
 	font-family: 'Abril Fatface', cursive;
 	color: white;
-	opacity: 1.0;
 }
 
 .titel{
@@ -38,37 +22,23 @@ p{
 	text-align: center;
 	font-size: 50px;
 	color: white;
-	opacity: 1.0;
 }
 
 .border{
 	border-style: dotted solid;
 	font-family: 'Josefin Slab', serif;
 	margin-bottom: 100px;
-	width: 70%;
 	color: white;
-	margin: auto;
-	opacity: 1.0;
 }
 
 .txt{
 	margin-left: 10px;
 	font-size: 25px;
 	color: white;
-	opacity: 1.0;
 }
 
 .img{
 	width: 780px;
 	height: 439px;
 	margin: auto;
-	opacity: 1.0;
-	margin: auto;
-	display: block;
 }
-
-.date{
-	text-align: center;
-	margin-left: 60%;
-} 
-

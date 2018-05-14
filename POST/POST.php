@@ -79,7 +79,6 @@
 	    $stmt->bindParam(':content', $content,  PDO::PARAM_STR);
 	   	$stmt->bindParam(':image', $image,  PDO::PARAM_STR);
 	   	$stmt->execute();
-
 		Header("Location: ../POST/POST.php");
 		exit();
 	}elseif(isset($_POST['delete'])){
@@ -88,7 +87,6 @@
 		$stmt = $dbh->prepare($sql);	
 		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		$stmt->execute();
-
 		Header("Location: ../POST/POST.php");
 		exit();
 	}elseif(isset($_POST['edit'])){
@@ -105,7 +103,7 @@
 				<label for="title">Titel</label>
 				<input type="text" id="title" name="title" value=<?php echo $value['title'] ?> size="29" placeholder="Title" required>	
 				<label for="content">Text</label>
-				<textarea name="content" class="content" value=<?php echo $value['content'] ?> placeholder="Content" rows="20" required><?php echo $value['content'] ?></textarea>
+				<textarea name="content" class="content" value=<?php echo $value['content'] ?> placeholder="Content" rows="20" required><?php echo $value['content'] ?></textarea>	
 				<lable for="image">Bild</lable>
 				<input type="text" id="image" name="image" value=<?php echo $value['image'] ?> size="29" placeholder="Image" required>
 				<input type="hidden" name="id" value=<?php echo $value['id'];?>>
@@ -113,19 +111,22 @@
 			</form>
  		</div>
 		<?php
+		}
 	}
-	}elseif(isset($_POST['editpost'])){
-		$id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
+	if(isset($_POST['editpost'])){
+		$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
 		$content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
 		$image = filter_input(INPUT_POST, 'image', FILTER_SANITIZE_SPECIAL_CHARS);
 		$sql = "UPDATE posts SET title = :title, content = :content, image = :image WHERE id = :id";
-		echo $id;
+		$stmt = $dbh->prepare($sql);
 		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		$stmt->bindParam(':title', $title,  PDO::PARAM_STR);
 	    $stmt->bindParam(':content', $content,  PDO::PARAM_STR);
 	   	$stmt->bindParam(':image', $image,  PDO::PARAM_STR);
 	    $stmt->execute();
+	    Header("Location: ../POST/POST.php");
+		exit();
 	}
 ?>
 </body>
