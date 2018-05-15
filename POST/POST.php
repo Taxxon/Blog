@@ -1,3 +1,5 @@
+
+	<!-- Databasuppkoplling och checkar för exeptions med try catch  -->
 <?php
 	try{
 		$dbh = new PDO("mysql:host=localhost;dbname=post;charset=utf8", "root", "", array(
@@ -15,7 +17,10 @@
 	 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 <body>
-
+	
+	<!-- Formulär som fylls i för att posta på bloggen, värden är title, content och image
+		 Databassen hämtar värden här ifrån
+	 -->
 	<div class="formdiv">
 		<form action="POST.php" method="post">
 			<label for="title">Titel</label> 
@@ -27,7 +32,8 @@
 			<input type="submit" name="submit" value="Submit">
 		</form>
 	</div>
-
+		
+		<!-- Tabel fär alla världen i databassen blir utskriven, uppdateras efter varje post -->
 		<table class="table">
 			<thead>
 				<tr>
@@ -43,11 +49,12 @@
 			</thead>
 			<tbody>
 			<?php
+				//Hämtar alla värden från databassen som finns
 				$sql = "SELECT * FROM posts";
 				$stmt = $dbh->prepare($sql);
 				$stmt->execute();
 				$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+				//Iriterar objekt från databasen in i tabbelen från varje post
 				foreach ($rows as $key => $value){
 					?>
 						<tr>
@@ -70,6 +77,7 @@
 		</table>
 
 <?php
+	//Filtrerar och sätter in värden från formuläret till databasen
 	if(isset($_POST['submit'])){
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
 		$content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -81,6 +89,7 @@
 	   	$stmt->execute();
 		Header("Location: ../POST/POST.php");
 		exit();
+	//Hämtar id från post som ska deletas och tar bort den
 	}elseif(isset($_POST['delete'])){
 		$id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 		$sql = "DELETE FROM posts WHERE id = :id";
@@ -89,6 +98,7 @@
 		$stmt->execute();
 		Header("Location: ../POST/POST.php");
 		exit();
+	//Skriver ut en ny formulär med värden från posten som vill redigeras
 	}elseif(isset($_POST['edit'])){
 		$id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 		$sql = "SELECT * FROM posts WHERE id = :id";
@@ -113,6 +123,7 @@
 		<?php
 		}
 	}
+	//Hämtar nya värden från nya formuläret och uppdaterar posten som skulle editas
 	if(isset($_POST['editpost'])){
 		$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
