@@ -7,13 +7,12 @@
 	}
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="se">
 <head>
 	<title>Blog</title>
 	 <link rel="stylesheet" type="text/css" href="style.css">
 	 <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 	 <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
-	 <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 	<main>
@@ -26,7 +25,7 @@
 
 			foreach ($rows as $key => $value) { ?>
 				<article>;
-					<img class="img" src=<?php echo $value["image"]; ?>>;
+					<img alt="ERROR" class="img" src=<?php echo $value["image"]; ?>>;
 					<h2 class="titel"><?php echo $value["title"] ?></h2>;
 					<div class="border">;
 						<p class="txt"><?php echo $value["content"] ?></p>;

@@ -8,7 +8,7 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="se">
 <head>
 	<title>POST</title>
 	 <link rel="stylesheet" type="text/css" href="style.css">
@@ -22,7 +22,7 @@
 			<input type="text" id="title" name="title" size="29" placeholder="Title" required>
 			<label for="content">Text</label>
 			<textarea name="content" class="content" placeholder="Content" required rows="20"></textarea>
-			<lable for="image">Bild</lable>
+			<label for="image">Bild</label>
 			<input type="text" id="image" name="image" size="29" placeholder="Image" required>
 			<input type="submit" name="submit" value="Submit">
 		</form>
@@ -50,7 +50,6 @@
 
 				foreach ($rows as $key => $value){
 					?>
-					<form action="POST.php" method="post">
 						<tr>
 							<td><?php echo $value['id'] ?></td>
 							<td><?php echo $value['userid'] ?></td>
@@ -58,11 +57,12 @@
 							<td><?php echo $value['content'] ?></td>
 							<td><?php echo $value['image'] ?></td>
 							<td><?php echo date("Y-m-d", strtotime($value['date'])) ?></td>
-							<input type="hidden" name="id" value=<?php echo $value['id'];?>>
-							<td><input type="submit" name="delete" value="Delete"></td>
+							<td><form action="POST.php" method="post">
+								<input type="hidden" name="id" value=<?php echo $value['id'];?>>
+							    <input type="submit" name="delete" value="Delete"></td>
 							<td><input type="submit" name="edit" value="Edit"></td>
+								</form>
 						</tr>
-						</form>
 				<?php
 				}
 				?>
